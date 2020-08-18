@@ -2,15 +2,19 @@ import QtQuick 2.0
 
 Text{
     id: root
+
     text:"You win!"
+    color: "#001a1c"
+
     anchors {
-        verticalCenter: parent.verticalCenter;
+        verticalCenter: parent.verticalCenter
         left: parent.left
-        leftMargin: parent.width / 70;
+        leftMargin: parent.width / 70
     }
+
     font {
-        pointSize: Math.min(parent.height,parent.width) / 1.5;
+        pointSize: Math.min(parent.height,parent.width) / 1.5
         bold: true
     }
-    color: "#001a1c"
+
 }

@@ -9,8 +9,6 @@ Item{
 
     GridView{
         id: puzzleView
-        //make me work pls
-        //property string tileNumber: display
 
         anchors.fill: root
 
@@ -32,16 +30,17 @@ Item{
 
             width: puzzleView.cellWidth
             height: puzzleView.cellHeight
-            //y, and here
+
             tile_number: display
 
             onClicked: {
-                gameModel.swap(index)
+                gameModel.swap(index);
             }
         }
         move: Transition {
-            NumberAnimation { properties: "x,y"
-                duration: 200
+            NumberAnimation {
+                properties: "x, y";
+                duration: 200;
             }
         }
     }

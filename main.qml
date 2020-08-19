@@ -19,7 +19,7 @@ Window {
         id: topBar
 
         width: root.width
-        height:root.height/10
+        height: root.height / 10
 
         onShuffleButtonClicked: gameField.shuffleTiles()
     }
@@ -30,13 +30,13 @@ Window {
         width: root.width
         height: parent.height - topBar.height
 
-        anchors{
-            top: topBar.bottom
-            left: parent.left
+        anchors {
+            top: topBar.bottom;
+            left: parent.left;
         }
 
         onGameIsOver: {
-            topBar.isWinMassageOn = true
+            topBar.isWinMessageOn = true;
         }
     }
 

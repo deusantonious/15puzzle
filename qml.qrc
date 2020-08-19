@@ -5,6 +5,6 @@
         <file>Tile.qml</file>
         <file>GameField.qml</file>
         <file>TopBar.qml</file>
-        <file>WinMassage.qml</file>
+        <file>WinMessage.qml</file>
     </qresource>
 </RCC>

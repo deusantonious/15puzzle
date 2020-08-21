@@ -39,5 +39,4 @@ Window {
             topBar.isWinMessageOn = true;
         }
     }
-
 }

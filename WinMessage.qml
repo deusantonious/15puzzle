@@ -13,7 +13,7 @@ Text {
     }
 
     font {
-        pixelSize: Math.min(parent.height,parent.width) / 2;
+        pixelSize: Math.min(parent.height, parent.width) / 2;
         bold: true;
     }
 }

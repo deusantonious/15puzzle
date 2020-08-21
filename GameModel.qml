@@ -11,7 +11,6 @@ ListModel {
     function swap(id) { 
         if(gameIsActive === false) return;
         //left
-
         if(id - 1 >= 0 && get(id - 1).display === "0" && id % 4 != 0) {
             move(id, id - 1, 1);
         }//right
@@ -35,11 +34,13 @@ ListModel {
 
     // https://e-maxx.ru/algo/15_puzzle
     function shuffle() {
-        gameIsActive = true;
-        root.clear();
-        var order;
         let inv = 1;
         var i  = 0;
+        var order;
+
+        gameIsActive = true;
+        root.clear();
+
         while(inv % 2 != 0){
             order = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0].sort(function() { return Math.random() -.5; });
             inv = 0;

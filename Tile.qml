@@ -3,7 +3,7 @@ import QtQuick 2.0
 MouseArea {
     id: root
 
-    property string tile_number: ""
+    property string tileNumber: ""
 
     Rectangle {
 
@@ -14,7 +14,7 @@ MouseArea {
             margins:  Math.min(root.width, root.height) / 75;
         }
 
-        visible: tile_number !== "0"
+        visible: tileNumber !== "0"
         color: "#78a85d"
         radius: Math.min(root.height, root.width) / 25
 
@@ -29,7 +29,7 @@ MouseArea {
             }
 
             color: "#001a1c"
-            text: root.tile_number
+            text: root.tileNumber
         }
     }
 }

@@ -31,7 +31,7 @@ Item{
             width: puzzleView.cellWidth
             height: puzzleView.cellHeight
 
-            tile_number: display
+            tileNumber: display
 
             onClicked: {
                 gameModel.swap(index);

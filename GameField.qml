@@ -1,13 +1,14 @@
 import QtQuick 2.0
-Item{
+
+Item {
     id: root
     signal gameIsOver
 
-    function shuffleTiles(){
+    function shuffleTiles() {
         gameModel.shuffle();
     }
 
-    GridView{
+    GridView {
         id: puzzleView
 
         anchors.fill: root
@@ -20,8 +21,8 @@ Item{
         model: GameModel {
             id:gameModel
 
-            onGameIsOver:{
-                root.gameIsOver()
+            onGameIsOver: {
+                root.gameIsOver();
             }
         }
 
@@ -39,8 +40,8 @@ Item{
         }
         move: Transition {
             NumberAnimation {
-                properties: "x, y";
-                duration: 200;
+                properties: "x, y"
+                duration: 200
             }
         }
     }

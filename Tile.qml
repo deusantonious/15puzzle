@@ -10,8 +10,8 @@ MouseArea {
         id: tile
 
         anchors {
-            fill: parent;
-            margins:  Math.min(root.width, root.height) / 75;
+            fill: parent
+            margins:  Math.min(root.width, root.height) / 75
         }
 
         visible: tileNumber !== "0"
@@ -24,8 +24,8 @@ MouseArea {
             anchors.centerIn: parent
 
             font {
-                bold: true;
-                pixelSize: Math.min(root.height, root.width) / 2;
+                bold: true
+                pixelSize: Math.min(root.height, root.width) / 2
             }
 
             color: "#001a1c"

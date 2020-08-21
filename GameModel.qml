@@ -2,13 +2,13 @@ import QtQuick 2.0
 
 ListModel {
     id:root
-
-    readonly property int count: 16
+    property var order: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 0, 15]
+    readonly property int count: order.length
     property bool gameIsActive: true
 
     signal gameIsOver
 
-    function swap(id) { 
+    function swap(id) {
         if(gameIsActive === false) return;
         //left
         if(id - 1 >= 0 && get(id - 1).display === "0" && id % 4 != 0) {
@@ -36,29 +36,33 @@ ListModel {
     function shuffle() {
         let inv = 1;
         var i  = 0;
-        var order;
 
         gameIsActive = true;
         root.clear();
 
-        while(inv % 2 != 0){
-            order = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0].sort(function() { return Math.random() -.5; });
+        while(inv % 2 != 0) {
+            order.sort(function() { return Math.random() -.5; });
             inv = 0;
-            for (i = 0; i < 16; ++i)
-                if (order[i] !== 0)
-                    for (let j = 0; j < i; ++j)
-                        if (order[j] > order[i])
+            for (i = 0; i < count; ++i) {
+                if (order[i] !== 0) {
+                    for (let j = 0; j < i; ++j) {
+                        if (order[j] > order[i]) {
                             ++inv;
-
-            for (i = 0; i < 16; ++i)
-                if (order[i] === 0)
+                        }
+                    }
+                }
+            }
+            for (i = 0; i < count; ++i)  {
+                if (order[i] === 0) {
                     inv += 1 + i / 4;
+                }
+            }
         }
         createModel(order);
 
     }
-    function createModel(array){
-        for(let i = 0; i < 16; i++){
+    function createModel(array) {
+        for(let i = 0; i < count; i++) {
             append({"display": String(array[i])});
         }
     }
@@ -73,5 +77,5 @@ ListModel {
         gameIsActive = false;
     }
 
-    Component.onCompleted: createModel([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 0, 15])
+    Component.onCompleted: createModel(order)
 }

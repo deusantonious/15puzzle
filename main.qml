@@ -21,7 +21,9 @@ Window {
         width: root.width
         height: root.height / 10
 
-        onShuffleButtonClicked: gameField.shuffleTiles()
+        onShuffleButtonClicked: {
+            gameField.shuffleTiles();
+        }
     }
 
     GameField {
@@ -31,8 +33,8 @@ Window {
         height: parent.height - topBar.height
 
         anchors {
-            top: topBar.bottom;
-            left: parent.left;
+            top: topBar.bottom
+            left: parent.left
         }
 
         onGameIsOver: {

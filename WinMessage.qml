@@ -7,13 +7,13 @@ Text {
     color: "#001a1c"
 
     anchors {
-        verticalCenter: parent.verticalCenter;
-        left: parent.left;
-        leftMargin: parent.width / 70;
+        verticalCenter: parent.verticalCenter
+        left: parent.left
+        leftMargin: parent.width / 70
     }
 
     font {
-        pixelSize: Math.min(parent.height, parent.width) / 2;
-        bold: true;
+        pixelSize: Math.min(parent.height, parent.width) / 2
+        bold: true
     }
 }

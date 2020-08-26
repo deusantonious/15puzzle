@@ -1,5 +1,6 @@
 import QtQuick 2.0
 
+//test
 Item {
     id: root
     signal gameIsOver

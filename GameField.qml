@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import GameFieldModel 1.0;
 
 Item {
     id: root
@@ -21,9 +22,7 @@ Item {
         model: GameModel {
             id:gameModel
 
-            onGameIsOver: {
-                root.gameIsOver();
-            }
+
         }
 
         delegate: Tile {

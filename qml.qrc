@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>GameModel.qml</file>
         <file>Tile.qml</file>
         <file>GameField.qml</file>
         <file>TopBar.qml</file>

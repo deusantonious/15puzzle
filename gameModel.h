@@ -4,14 +4,14 @@
 #include <QAbstractListModel>
 #include <vector>
 
-class GameModel : public QAbstractListModel
+class gameModel : public QAbstractListModel
 {
     Q_OBJECT
 
 public:
     static constexpr size_t tilesCount {16};
 
-    GameModel(QObject* parent = nullptr);
+    gameModel(QObject* parent = nullptr);
 
     struct Tile{
         size_t value {};
@@ -29,6 +29,11 @@ public:
 private:
     std::vector<Tile> m_gameField;
     void shuffleTiles();
+    bool VectorIndexIsValid(size_t index) const;
+    bool isBoardValid() const;
+
+    int rowCount(const QModelIndex& parent = QModelIndex {}) const override;
+    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
 };
 
 #endif // GAMEMODEL_H

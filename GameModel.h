@@ -17,7 +17,7 @@ signals:
 public:
     GameModel(QObject* parent = nullptr);
 
-    struct Tile{
+    struct Tile {
         int value {};
 
         Tile& operator = (const int newValue) {

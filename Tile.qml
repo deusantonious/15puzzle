@@ -4,6 +4,7 @@ MouseArea {
     id: root
 
     property string tileNumber: ""
+    property string hiddenValue: ""
 
     Rectangle {
 
@@ -14,7 +15,7 @@ MouseArea {
             margins:  Math.min(root.width, root.height) / 75
         }
 
-        visible: tileNumber !== "0"
+        visible: tileNumber !== hiddenValue
         color: "#78a85d"
         radius: Math.min(root.height, root.width) / 25
 

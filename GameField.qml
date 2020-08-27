@@ -6,7 +6,7 @@ Item {
     signal gameIsOver
 
     function shuffleTiles() {
-        gameModel.shuffle();
+        gameModel.shuffleTiles();
     }
 
     GridView {
@@ -14,15 +14,17 @@ Item {
 
         anchors.fill: root
 
-        cellHeight: puzzleView.height / 4
-        cellWidth: puzzleView.width / 4
+        cellHeight: puzzleView.height / gameModel.dimention
+        cellWidth: puzzleView.width / gameModel.dimention
 
         interactive: false
 
         model: GameModel {
             id:gameModel
 
-
+            onGameOver: {
+                gameIsOver();
+            }
         }
 
         delegate: Tile {
@@ -31,10 +33,11 @@ Item {
             width: puzzleView.cellWidth
             height: puzzleView.cellHeight
 
+            hiddenValue: gameModel.hiddenValue
             tileNumber: display
 
             onClicked: {
-                gameModel.swap(index);
+                gameModel.move(index);
             }
         }
         move: Transition {
@@ -42,6 +45,7 @@ Item {
                 properties: "x, y"
                 duration: 200
             }
+
         }
     }
 }

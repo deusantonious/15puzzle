@@ -12,12 +12,12 @@ MouseArea {
 
         anchors {
             fill: parent
-            margins:  Math.min(root.width, root.height) / 75
+            margins:  Math.min(root.width, root.height) * 0.02
         }
 
         visible: tileNumber !== hiddenValue
         color: "#78a85d"
-        radius: Math.min(root.height, root.width) / 25
+        radius: Math.min(root.height, root.width) * 0.04
 
         Text {
             id: text
@@ -26,7 +26,7 @@ MouseArea {
 
             font {
                 bold: true
-                pixelSize: Math.min(root.height, root.width) / 2
+                pixelSize: Math.min(root.height, root.width) * 0.5
             }
 
             color: "#001a1c"

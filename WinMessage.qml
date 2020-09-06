@@ -9,11 +9,11 @@ Text {
     anchors {
         verticalCenter: parent.verticalCenter
         left: parent.left
-        leftMargin: parent.width / 70
+        leftMargin: parent.width * 0.02
     }
 
     font {
-        pixelSize: Math.min(parent.height, parent.width) / 2
+        pixelSize: Math.min(parent.height, parent.width) * 0.5
         bold: true
     }
 }

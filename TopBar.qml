@@ -27,7 +27,7 @@ Rectangle {
         anchors {
             verticalCenter: root.verticalCenter
             right: root.right
-            rightMargin: root.width / 75
+            rightMargin: root.width * 0.02
         }
 
         background: Rectangle {
@@ -36,7 +36,7 @@ Rectangle {
         }
 
         text: "<font color='#001a1c'><b>shuffle</b></font>"
-        font.pixelSize: shuffleButton.height / 2
+        font.pixelSize: shuffleButton.height * 0.5
 
         onClicked: {
             root.shuffleButtonClicked();

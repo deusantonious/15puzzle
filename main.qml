@@ -19,7 +19,7 @@ Window {
         id: topBar
 
         width: root.width
-        height: root.height / 10
+        height: root.height * 0.1
 
         onShuffleButtonClicked: {
             gameField.shuffleTiles();

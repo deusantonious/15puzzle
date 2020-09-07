@@ -12,7 +12,7 @@ MouseArea {
 
         anchors {
             fill: parent
-            margins:  Math.min(root.width, root.height) * 0.02
+            margins:  Math.min(root.width, root.height) * 0.02 //0.02 - my margin koef
         }
 
         visible: tileNumber !== hiddenValue

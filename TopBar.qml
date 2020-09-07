@@ -27,7 +27,7 @@ Rectangle {
         anchors {
             verticalCenter: root.verticalCenter
             right: root.right
-            rightMargin: root.width * 0.02
+            rightMargin: root.width * 0.02 //0.02 - my margin koef
         }
 
         background: Rectangle {

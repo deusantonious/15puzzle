@@ -7,8 +7,7 @@ GameModel::GameModel(QObject *parent)
     :QAbstractListModel {parent},
       m_dimention {4},
       m_tilesCount {m_dimention * m_dimention},
-      m_hiddenValue {m_tilesCount},
-      m_isActive {true}
+      m_isGameOver {true}
 {
     m_gameField.resize(m_tilesCount);
     std::iota(m_gameField.begin(), m_gameField.end(), 1);
@@ -17,9 +16,10 @@ GameModel::GameModel(QObject *parent)
 
 void GameModel::shuffleTiles()
 {
-    m_isActive = true;
+    m_isGameOver = true;
     auto seed {std::chrono::system_clock::now().time_since_epoch().count()};
-    static std::mt19937 randomGenerator{seed};
+    static std::mt19937 randomGenerator {seed};
+
     beginResetModel();
     do {
         std::shuffle(m_gameField.begin(), m_gameField.end(), randomGenerator);
@@ -32,35 +32,37 @@ void GameModel::move(int index)
 {
     int moveFrom {index};
     int moveTo {-1};
-    int moveExtender {0};
-    if (!VectorIndexIsValid(index) || m_isActive == false) {
+    int moveExtender {0}; // can be 0 or 1 need to beginMoveRows correct work
+
+    if (index < 0 || index >= m_tilesCount || m_isGameOver == false) {
         return;
     }
     //left
     if (index - 1 >= 0 &&
-            m_gameField[index - 1] == m_hiddenValue &&
+            m_gameField[index - 1] == m_tilesCount && //m_tilesCount - hiddenvalue
             index % 4 != 0)
     {
         moveTo = index - 1;
     }//right
-    else if (index + 1 < m_tilesCount &&
-             m_gameField[index + 1] == m_hiddenValue &&
+    else if (index + 1 < m_tilesCount && //m_tilesCount - size
+             m_gameField[index + 1] == m_tilesCount && //m_tilesCount - hiddenvalue
              (index + 1) % 4 != 0)
     {
         moveExtender = 1;
         moveTo = index + 1;
     }//up
     else if (index - 4 >= 0 &&
-             m_gameField[index - 4] == m_hiddenValue)
+             m_gameField[index - 4] == m_tilesCount) //m_tilesCount - hiddenvalue
     {
         moveTo = index - 4;
     }//down
-    else if (index + 4 < m_tilesCount &&
-             m_gameField[index + 4] == m_hiddenValue)
+    else if (index + 4 < m_tilesCount && //m_tilesCount - size
+             m_gameField[index + 4] == m_tilesCount) //m_tilesCount - hiddenvalue
     {
         moveExtender = 1;
         moveTo = index + 4;
     }
+
     if (moveTo != -1)// if moveTo == -1 >>> nothing to move
     {
         beginMoveRows(QModelIndex(), moveFrom, moveFrom, QModelIndex(), moveTo + moveExtender);
@@ -77,14 +79,20 @@ void GameModel::move(int index)
     isGameOver();
 }
 
-bool GameModel::VectorIndexIsValid(int index) const
+QHash<int, QByteArray> GameModel::roleNames() const
 {
-    return index < m_tilesCount;
+    QHash <int, QByteArray> roles;
+
+    roles[roles::hiddenNumberValue] = "hiddenNumberValue";
+    roles[Qt::DisplayRole] = "display";
+
+    return roles;
 }
 
 bool GameModel::isBoardValid() const
 {
     int inv {0};
+
     for (int i {0}; i < m_tilesCount; ++i) {
         for (int j {i}; j < m_tilesCount; ++j) {
             if (m_gameField[j] < m_gameField[i] && m_gameField[i] != m_tilesCount) {
@@ -105,30 +113,13 @@ bool GameModel::isBoardValid() const
 
 bool GameModel::isGameOver()
 {
-    int count {m_tilesCount - 2};
-    for (int i {0}; i < count; i++) {
-        if (m_gameField[i + 1] - m_gameField[i] != 1) {
-            return false;
-        }
+    if (std::is_sorted(m_gameField.begin(), m_gameField.end())) {
+        m_isGameOver = false;
+        emit isGameOverChanged();
+
+        return true;
     }
-    m_isActive = false;
-    emit gameOver();
-    return true;
-}
-
-bool GameModel::getIsActive() const
-{
-    return m_isActive;
-}
-
-void GameModel::setIsActive(bool isActive)
-{
-    m_isActive = isActive;
-}
-
-int GameModel::getHiddenValue() const
-{
-    return m_hiddenValue;
+    return false;
 }
 
 int GameModel::getDimention() const
@@ -142,15 +133,23 @@ int GameModel::rowCount(const QModelIndex &parent) const
     return m_tilesCount;
 }
 
-QVariant GameModel::data(const QModelIndex &index, int role) const
+QVariant GameModel::data (const QModelIndex &index, int role) const
 {
-    if (!index.isValid() || role != Qt::DisplayRole) {
+    if (!index.isValid()) {
         return {};
     }
 
-    const int rowNumber {index.row()};
-    if (!VectorIndexIsValid(rowNumber)) {
+    switch (role) {
+    case Qt::DisplayRole: {
+
+        return QVariant::fromValue(m_gameField[index.row()]);
+    }
+    case roles::hiddenNumberValue: {
+        return QVariant::fromValue(m_tilesCount);
+    }
+    default: {
         return {};
     }
-    return QVariant::fromValue(m_gameField[rowNumber]);
+    }
+
 }

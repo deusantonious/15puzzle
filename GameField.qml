@@ -14,15 +14,15 @@ Item {
 
         anchors.fill: root
 
-        cellHeight: puzzleView.height / gameModel.dimention
-        cellWidth: puzzleView.width / gameModel.dimention
+        cellHeight: puzzleView.height / model.dimention
+        cellWidth: puzzleView.width / model.dimention
 
         interactive: false
 
         model: GameModel {
             id:gameModel
 
-            onGameOver: {
+            onIsGameOverChanged: {
                 gameIsOver();
             }
         }
@@ -33,7 +33,7 @@ Item {
             width: puzzleView.cellWidth
             height: puzzleView.cellHeight
 
-            hiddenValue: gameModel.hiddenValue
+            hiddenValue: hiddenNumberValue
             tileNumber: display
 
             onClicked: {

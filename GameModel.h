@@ -24,7 +24,7 @@ public:
     QHash <int, QByteArray> roleNames() const override;
 
     enum roles {
-        hiddenNumberValue = Qt::UserRole + 1,
+        HiddenNumberValue = Qt::UserRole + 1,
     };
 
 private: //vars

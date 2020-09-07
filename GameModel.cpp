@@ -83,7 +83,7 @@ QHash<int, QByteArray> GameModel::roleNames() const
 {
     QHash <int, QByteArray> roles;
 
-    roles[roles::hiddenNumberValue] = "hiddenNumberValue";
+    roles[roles::HiddenNumberValue] = "hiddenNumberValue";
     roles[Qt::DisplayRole] = "display";
 
     return roles;
@@ -144,7 +144,7 @@ QVariant GameModel::data (const QModelIndex &index, int role) const
 
         return QVariant::fromValue(m_gameField[index.row()]);
     }
-    case roles::hiddenNumberValue: {
+    case roles::HiddenNumberValue: {
         return QVariant::fromValue(m_tilesCount);
     }
     default: {
